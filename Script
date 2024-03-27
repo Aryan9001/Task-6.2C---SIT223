@@ -2,67 +2,65 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            // Use mvn clean package
             steps {
                 git branch: 'main', url: 'https://github.com/Aryan9001/SIT313---Task-1.1P.git'
                 echo "Fetching the source code from Github"
                 echo "Compiling the code and generating artifacts"
+                echo "Building with Maven"
             }
         }
         stage('Unit and Integration Tests') {
-            // use mvn test
             steps {
                 echo "Running unit tests started and completed"
                 echo "Running integration tests started and completed"
+                echo "Tests successfull with JUnit"
             }
             post {
                 success {
-                       mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
+                    mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
                 }
             }
-            
         }
         stage('Code Analysis') {
-            // Integrate a code analysis tool using Checkstyle
             steps {
                 echo "Running Code Analysis started and completed"
+                echo "code analysis using tool FindBugs completed"
             }
         }
         stage('Security Scan') {
-            // Use OWASP ZAP for security scan
             steps {
                 echo "Running Security Scan started and completed"
+                echo "security scan using Nessus completed"
+                
             }
             post {
                 success {
-                       mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
+                    mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
                 }
             }
-            
-            
         }
         stage('Deploy to Staging') {
-            // Use SSH to deploy to staging
             steps {
                 echo "Running Deploy to Staging started and completed"
+                echo "Deploying using Jenkins Deploy Plugin completed"
+                
             }
         }
         stage('Integration Tests on Staging') {
-            // Use mvn test for testing
             steps {
                 echo "Running Integration Tests on Staging started and completed"
+                echo "Intergration tests on staging using the tool JUnit completed"
             }
             post {
                 success {
-                       mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
+                    mail bcc: '', body: 'Yaayy...the build was a success. See you on Failure', cc: '', from: '', replyTo: '', subject: 'SUCCESS', to: 'aryannandal545@gmail.com'
                 }
             }
-            
         }
         stage('Deploy to Production') {
             steps {
-                // Use SSH deploy to production 
                 echo "Running Integration Tests on Staging started and completed"
+                echo "deploying using Jenkins Deploy Plugin completed"
             }
         }
     }
